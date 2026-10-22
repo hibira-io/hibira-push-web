@@ -1,0 +1,55 @@
+{
+  "name": "@hikibi/push-web",
+  "version": "1.0.0",
+  "description": "Web push notifications for Hikibi Push: a drop-in client for apps moving from Pusher Beams",
+  "keywords": [
+    "hikibi",
+    "web push",
+    "push notifications",
+    "service worker"
+  ],
+  "homepage": "https://github.com/hikibi-io/hikibi-push-web#readme",
+  "bugs": {
+    "url": "https://github.com/hikibi-io/hikibi-push-web/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hikibi-io/hikibi-push-web.git"
+  },
+  "license": "MIT",
+  "author": "Hikibi (https://hikibi.io)",
+  "type": "module",
+  "main": "dist/push-web.js",
+  "module": "dist/push-web.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./dist/push-web.js"
+    },
+    "./service-worker.js": "./dist/service-worker.js"
+  },
+  "files": [
+    "dist",
+    "index.d.ts",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node build.mjs && node --test test/*.test.mjs",
+    "prepublishOnly": "npm test"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.5",
+    "fake-indexeddb": "6.0.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
