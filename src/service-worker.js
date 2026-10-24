@@ -2,14 +2,15 @@
 import doRequest from './do-request';
 import DeviceStateStore from './device-state-store';
 
-// Set self.HikibiPush.endpoint after importing this script when the app is
-// not on Hikibi's default cluster (it is only used to report deliveries and
-// opens).
-self.HikibiPush = {
+// Set self.HibiraPush.endpoint after importing this script when the app is
+// not on Hibira's default cluster (it is only used to report deliveries and
+// opens). self.HikibiPush is the same object, kept for service workers written
+// before the rename.
+self.HibiraPush = {
   endpoint: 'https://ws.hikibi.io',
   onNotificationReceived: null,
 
-  _endpoint: () => self.HikibiPush.endpoint.replace(/\/+$/, ''),
+  _endpoint: () => self.HibiraPush.endpoint.replace(/\/+$/, ''),
 
   _getVisibleClient: () =>
     self.clients
@@ -20,7 +21,7 @@ self.HikibiPush = {
       .then(clients => clients.find(c => c.visibilityState === 'visible')),
 
   _hasVisibleClient: () =>
-    self.HikibiPush._getVisibleClient().then(
+    self.HibiraPush._getVisibleClient().then(
       client => client !== undefined
     ),
 
@@ -33,7 +34,7 @@ self.HikibiPush = {
       .then(clients => clients.find(c => c.focused === true)),
 
   _hasFocusedClient: () =>
-    self.HikibiPush._getFocusedClient().then(
+    self.HibiraPush._getFocusedClient().then(
       client => client !== undefined
     ),
 
@@ -55,9 +56,9 @@ self.HikibiPush = {
     const deviceId = await deviceStateStore.getDeviceId();
     const userId = (await deviceStateStore.getUserId()) || null;
 
-    const appInBackground = !(await self.HikibiPush._hasVisibleClient());
+    const appInBackground = !(await self.HibiraPush._hasVisibleClient());
 
-    const path = `${self.HikibiPush._endpoint(
+    const path = `${self.HibiraPush._endpoint(
       instanceId
     )}/reporting_api/v2/instances/${instanceId}/events`;
 
@@ -83,21 +84,22 @@ self.HikibiPush = {
     }
   },
 };
+self.HikibiPush = self.HibiraPush;
 
 self.addEventListener('push', e => {
   let payload;
   try {
     payload = e.data.json();
   } catch (_) {
-    return; // Not a Hikibi Push notification
+    return; // Not a Hibira Push notification
   }
 
   if (!payload.data || !payload.data.pusher) {
-    return; // Not a Hikibi Push notification
+    return; // Not a Hibira Push notification
   }
 
   // Report analytics event, best effort
-  self.HikibiPush.reportEvent({
+  self.HibiraPush.reportEvent({
     eventType: 'delivery',
     pusherMetadata: payload.data.pusher,
   });
@@ -119,7 +121,7 @@ self.addEventListener('push', e => {
       true;
     if (
       hideNotificationIfSiteHasFocus &&
-      (await self.HikibiPush._hasFocusedClient())
+      (await self.HibiraPush._hasFocusedClient())
     ) {
       return;
     }
@@ -142,8 +144,8 @@ self.addEventListener('push', e => {
     return self.registration.showNotification(title, options);
   };
 
-  if (self.HikibiPush.onNotificationReceived) {
-    self.HikibiPush.onNotificationReceived({
+  if (self.HibiraPush.onNotificationReceived) {
+    self.HibiraPush.onNotificationReceived({
       payload: customerPayload,
       pushEvent: e,
       handleNotification,
@@ -156,10 +158,10 @@ self.addEventListener('push', e => {
 self.addEventListener('notificationclick', e => {
   const { pusher } = e.notification.data;
 
-  const isHikibiNotification = pusher !== undefined;
-  if (isHikibiNotification) {
+  const isHibiraNotification = pusher !== undefined;
+  if (isHibiraNotification) {
     // Report analytics event, best effort
-    self.HikibiPush.reportEvent({
+    self.HibiraPush.reportEvent({
       eventType: 'open',
       pusherMetadata: pusher.pusherMetadata,
     });

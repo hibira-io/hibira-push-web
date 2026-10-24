@@ -78,3 +78,18 @@ test('start registers the browser, then interests and user go to the endpoint', 
   assert.equal(requests[1].headers.Authorization, 'Bearer jwt');
   assert.equal(await c.getRegistrationState(), 'PERMISSION_GRANTED_REGISTERED_WITH_BEAMS');
 });
+
+test('the CDN script and service worker define HibiraPush and the old HikibiPush alias', async () => {
+  const { readFileSync } = await import('node:fs');
+  const vm = await import('node:vm');
+  const page = { window: {}, navigator: {} };
+  vm.runInNewContext(readFileSync(new URL('../dist/push-web.min.js', import.meta.url), 'utf8'), page);
+  assert.equal(typeof page.HibiraPush.Client, 'function');
+  assert.equal(page.HikibiPush, page.HibiraPush);
+
+  const worker = { addEventListener() {} };
+  worker.self = worker;
+  vm.runInNewContext(readFileSync(new URL('../dist/service-worker.js', import.meta.url), 'utf8'), worker);
+  assert.equal(worker.HibiraPush.endpoint, 'https://ws.hikibi.io');
+  assert.equal(worker.HikibiPush, worker.HibiraPush);
+});

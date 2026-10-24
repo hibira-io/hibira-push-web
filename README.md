@@ -1,6 +1,6 @@
-# @hikibi/push-web
+# @hibira-io/push-web
 
-Web push notifications for [Hikibi Push](https://hikibi.io). It is the web
+Web push notifications for [Hibira Push](https://hikibi.io). It is the web
 client for the Beams-compatible push API: an MIT-licensed fork of the Pusher
 Beams web SDK with the host made configurable, so code written for that SDK
 keeps working after changing the import.
@@ -11,13 +11,13 @@ Safari 16.4+ (the Beams SDK did not enable Safari).
 ## Install
 
 ```sh
-npm install @hikibi/push-web
+npm install @hibira-io/push-web
 ```
 
-Or load the script, which defines the global `HikibiPush`:
+Or load the script, which defines the global `HibiraPush`:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@hikibi/push-web@1/dist/push-web.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hibira-io/push-web@1/dist/push-web.min.js"></script>
 ```
 
 ## Service worker
@@ -25,20 +25,20 @@ Or load the script, which defines the global `HikibiPush`:
 Serve a `/service-worker.js` at your site root that loads ours:
 
 ```js
-importScripts('https://cdn.jsdelivr.net/npm/@hikibi/push-web@1/dist/service-worker.js');
+importScripts('https://cdn.jsdelivr.net/npm/@hibira-io/push-web@1/dist/service-worker.js');
 // Only if your app is not on the default cluster:
-// self.HikibiPush.endpoint = 'https://ws-tyo.hikibi.io';
+// self.HibiraPush.endpoint = 'https://ws-tyo.hikibi.io';
 ```
 
-You can also copy `node_modules/@hikibi/push-web/dist/service-worker.js`
+You can also copy `node_modules/@hibira-io/push-web/dist/service-worker.js`
 into your site. To handle notifications yourself, set
-`self.HikibiPush.onNotificationReceived` (same arguments as Beams'
+`self.HibiraPush.onNotificationReceived` (same arguments as Beams'
 `onNotificationReceived`).
 
 ## Use
 
 ```js
-import { Client, TokenProvider } from '@hikibi/push-web';
+import { Client, TokenProvider } from '@hibira-io/push-web';
 
 const push = new Client({
   instanceId: 'YOUR_INSTANCE_ID', // portal: app page → Push notifications
@@ -56,14 +56,24 @@ await push.setUserId('alice', new TokenProvider({ url: '/push/user-token' }));
 `endpoint` is the push API base URL shown on the app page in the portal.
 `endpointOverride` is accepted as a synonym.
 
+## Moving from @hikibi/push-web
+
+Hikibi is now Hibira, and this package moved from `@hikibi/push-web` to
+`@hibira-io/push-web`. The API is the same: change the import and the
+`importScripts` URL. The global and the service-worker namespace are now
+`HibiraPush`; `HikibiPush` still works as an alias, so existing service
+workers that set `self.HikibiPush.endpoint` keep working. `@hikibi/push-web`
+1.0.0 stays on npm (deprecated) and gets no new versions. The push API host
+is still `https://ws.hikibi.io`.
+
 ## Moving from the Beams web SDK
 
-| Beams web SDK | @hikibi/push-web |
+| Beams web SDK | @hibira-io/push-web |
 |---|---|
-| `import * as PusherPushNotifications from '@pusher/push-notifications-web'` | `import * as HikibiPush from '@hikibi/push-web'` |
-| `new PusherPushNotifications.Client({ instanceId })` | `new HikibiPush.Client({ instanceId })` |
-| `importScripts('https://js.pusher.com/beams/service-worker.js')` | `importScripts('https://cdn.jsdelivr.net/npm/@hikibi/push-web@1/dist/service-worker.js')` |
-| `PusherPushNotifications.onNotificationReceived = …` in the service worker | `HikibiPush.onNotificationReceived = …` |
+| `import * as PusherPushNotifications from '@pusher/push-notifications-web'` | `import * as HibiraPush from '@hibira-io/push-web'` |
+| `new PusherPushNotifications.Client({ instanceId })` | `new HibiraPush.Client({ instanceId })` |
+| `importScripts('https://js.pusher.com/beams/service-worker.js')` | `importScripts('https://cdn.jsdelivr.net/npm/@hibira-io/push-web@1/dist/service-worker.js')` |
+| `PusherPushNotifications.onNotificationReceived = …` in the service worker | `HibiraPush.onNotificationReceived = …` |
 
 Everything else (`start`, interests, `setUserId`, `stop`, `clearAllState`,
 `getRegistrationState` and its values) is unchanged. Browsers that were
@@ -72,4 +82,4 @@ registered with Beams register again on the first `start()`.
 ## License
 
 MIT. Based on the Pusher Beams web SDK, Copyright (c) 2019 Pusher; see
-LICENSE. Hikibi is not affiliated with Pusher.
+LICENSE. Hibira is not affiliated with Pusher.
