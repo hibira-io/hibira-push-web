@@ -4,10 +4,9 @@ import DeviceStateStore from './device-state-store';
 
 // Set self.HibiraPush.endpoint after importing this script when the app is
 // not on Hibira's default cluster (it is only used to report deliveries and
-// opens). self.HikibiPush is the same object, kept for service workers written
-// before the rename.
+// opens).
 self.HibiraPush = {
-  endpoint: 'https://ws.hikibi.io',
+  endpoint: 'https://ws.hibira.io',
   onNotificationReceived: null,
 
   _endpoint: () => self.HibiraPush.endpoint.replace(/\/+$/, ''),
@@ -84,7 +83,6 @@ self.HibiraPush = {
     }
   },
 };
-self.HikibiPush = self.HibiraPush;
 
 self.addEventListener('push', e => {
   let payload;

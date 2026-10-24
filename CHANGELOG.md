@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0 - 2026-10-24
+
+- The default endpoint is now `https://ws.hibira.io`. `https://ws.hikibi.io` keeps
+  working, so apps on 1.1.0 and earlier need no change.
+- Links and the support address moved to hibira.io.
+- Removed the `HikibiPush` alias of `HibiraPush` (CDN script and service worker).
+
 ## 1.1.0 - 2026-10-24
 
 Renamed for the Hikibi → Hibira rebrand. No API changes.

@@ -50,7 +50,7 @@ export const DEFAULT_ENDPOINT: string;
 interface ClientOptions {
   instanceId: string;
   serviceWorkerRegistration?: ServiceWorkerRegistration;
-  /** Push API base URL; defaults to https://ws.hikibi.io. */
+  /** Push API base URL; defaults to https://ws.hibira.io. */
   endpoint?: string;
   /** Same as endpoint; accepted for code written for the Beams web SDK. */
   endpointOverride?: string;
