@@ -4,7 +4,6 @@
   "description": "Web push notifications for Hibira Push: a drop-in client for apps moving from Pusher Beams",
   "keywords": [
     "hibira",
-    "hikibi",
     "web push",
     "push notifications",
     "service worker"
