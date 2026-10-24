@@ -44,14 +44,14 @@ beforeEach(() => {
 
 test('defaults to the hosted push API', () => {
   const c = new Client({ instanceId: 'instance-0', serviceWorkerRegistration: registration });
-  assert.equal(DEFAULT_ENDPOINT, 'https://ws.hikibi.io');
-  assert.equal(c._baseURL, 'https://ws.hikibi.io');
+  assert.equal(DEFAULT_ENDPOINT, 'https://ws.hibira.io');
+  assert.equal(c._baseURL, 'https://ws.hibira.io');
 });
 
 test('endpoint and endpointOverride set the host', () => {
-  assert.equal(new Client({ instanceId: 'i', endpoint: 'https://ws-tyo.hikibi.io/', serviceWorkerRegistration: registration })._baseURL, 'https://ws-tyo.hikibi.io');
+  assert.equal(new Client({ instanceId: 'i', endpoint: 'https://ws-tyo.hibira.io/', serviceWorkerRegistration: registration })._baseURL, 'https://ws-tyo.hibira.io');
   assert.equal(new Client({ instanceId: 'i', endpointOverride: 'http://localhost:6001', serviceWorkerRegistration: registration })._baseURL, 'http://localhost:6001');
-  assert.throws(() => new Client({ instanceId: 'i', endpoint: 'ws.hikibi.io' }), /http\(s\) URL/);
+  assert.throws(() => new Client({ instanceId: 'i', endpoint: 'ws.hibira.io' }), /http\(s\) URL/);
 });
 
 test('start registers the browser, then interests and user go to the endpoint', async () => {
@@ -90,6 +90,6 @@ test('the CDN script and service worker define HibiraPush and the old HikibiPush
   const worker = { addEventListener() {} };
   worker.self = worker;
   vm.runInNewContext(readFileSync(new URL('../dist/service-worker.js', import.meta.url), 'utf8'), worker);
-  assert.equal(worker.HibiraPush.endpoint, 'https://ws.hikibi.io');
+  assert.equal(worker.HibiraPush.endpoint, 'https://ws.hibira.io');
   assert.equal(worker.HikibiPush, worker.HibiraPush);
 });

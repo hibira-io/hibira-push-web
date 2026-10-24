@@ -7,7 +7,7 @@ const sdkVersion = pkg.version;
 
 // DEFAULT_ENDPOINT is Hibira's hosted push API. Apps on another cluster or a
 // self-hosted server pass `endpoint`.
-export const DEFAULT_ENDPOINT = 'https://ws.hikibi.io';
+export const DEFAULT_ENDPOINT = 'https://ws.hibira.io';
 
 const INTERESTS_REGEX = new RegExp('^(_|\\-|=|@|,|\\.|;|[A-Z]|[a-z]|[0-9])*$');
 const MAX_INTEREST_LENGTH = 164;
@@ -530,7 +530,7 @@ export { TokenProvider };
 
 function trimEndpoint(endpoint) {
   if (typeof endpoint !== 'string' || !/^https?:\/\//.test(endpoint)) {
-    throw new Error('endpoint must be an http(s) URL, for example https://ws.hikibi.io');
+    throw new Error('endpoint must be an http(s) URL, for example https://ws.hibira.io');
   }
   return endpoint.replace(/\/+$/, '');
 }

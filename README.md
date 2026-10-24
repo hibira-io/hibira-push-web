@@ -1,6 +1,6 @@
 # @hibira-io/push-web
 
-Web push notifications for [Hibira Push](https://hikibi.io). It is the web
+Web push notifications for [Hibira Push](https://hibira.io). It is the web
 client for the Beams-compatible push API: an MIT-licensed fork of the Pusher
 Beams web SDK with the host made configurable, so code written for that SDK
 keeps working after changing the import.
@@ -27,7 +27,7 @@ Serve a `/service-worker.js` at your site root that loads ours:
 ```js
 importScripts('https://cdn.jsdelivr.net/npm/@hibira-io/push-web@1/dist/service-worker.js');
 // Only if your app is not on the default cluster:
-// self.HibiraPush.endpoint = 'https://ws-tyo.hikibi.io';
+// self.HibiraPush.endpoint = 'https://ws-tyo.hibira.io';
 ```
 
 You can also copy `node_modules/@hibira-io/push-web/dist/service-worker.js`
@@ -42,7 +42,7 @@ import { Client, TokenProvider } from '@hibira-io/push-web';
 
 const push = new Client({
   instanceId: 'YOUR_INSTANCE_ID', // portal: app page → Push notifications
-  // endpoint: 'https://ws.hikibi.io', // the default
+  // endpoint: 'https://ws.hibira.io', // the default
 });
 
 await push.start();
@@ -64,7 +64,7 @@ Hikibi is now Hibira, and this package moved from `@hikibi/push-web` to
 `HibiraPush`; `HikibiPush` still works as an alias, so existing service
 workers that set `self.HikibiPush.endpoint` keep working. `@hikibi/push-web`
 1.0.0 stays on npm (deprecated) and gets no new versions. The push API host
-is still `https://ws.hikibi.io`.
+is still `https://ws.hibira.io`.
 
 ## Moving from the Beams web SDK
 

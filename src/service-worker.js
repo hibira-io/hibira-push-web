@@ -7,7 +7,7 @@ import DeviceStateStore from './device-state-store';
 // opens). self.HikibiPush is the same object, kept for service workers written
 // before the rename.
 self.HibiraPush = {
-  endpoint: 'https://ws.hikibi.io',
+  endpoint: 'https://ws.hibira.io',
   onNotificationReceived: null,
 
   _endpoint: () => self.HibiraPush.endpoint.replace(/\/+$/, ''),
