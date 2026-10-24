@@ -5,7 +5,7 @@ import pkg from '../package.json' with { type: 'json' };
 
 const sdkVersion = pkg.version;
 
-// DEFAULT_ENDPOINT is Hikibi's hosted push API. Apps on another cluster or a
+// DEFAULT_ENDPOINT is Hibira's hosted push API. Apps on another cluster or a
 // self-hosted server pass `endpoint`.
 export const DEFAULT_ENDPOINT = 'https://ws.hikibi.io';
 
@@ -13,7 +13,7 @@ const INTERESTS_REGEX = new RegExp('^(_|\\-|=|@|,|\\.|;|[A-Z]|[a-z]|[0-9])*$');
 const MAX_INTEREST_LENGTH = 164;
 const MAX_INTERESTS_NUM = 5000;
 
-const SERVICE_WORKER_URL = `/service-worker.js?hikibiPushWebSDKVersion=${sdkVersion}`;
+const SERVICE_WORKER_URL = `/service-worker.js?hibiraPushWebSDKVersion=${sdkVersion}`;
 
 export const RegistrationState = Object.freeze({
   PERMISSION_PROMPT_REQUIRED: 'PERMISSION_PROMPT_REQUIRED',
@@ -48,25 +48,25 @@ export class Client {
 
     if (!('indexedDB' in window)) {
       throw new Error(
-        'Hikibi Push does not support this browser version (IndexedDB not supported)'
+        'Hibira Push does not support this browser version (IndexedDB not supported)'
       );
     }
 
     if (!window.isSecureContext) {
       throw new Error(
-        'Hikibi Push relies on Service Workers, which only work in secure contexts. Check that your page is being served from localhost/over HTTPS'
+        'Hibira Push relies on Service Workers, which only work in secure contexts. Check that your page is being served from localhost/over HTTPS'
       );
     }
 
     if (!('serviceWorker' in navigator)) {
       throw new Error(
-        'Hikibi Push does not support this browser version (Service Workers not supported)'
+        'Hibira Push does not support this browser version (Service Workers not supported)'
       );
     }
 
     if (!('PushManager' in window)) {
       throw new Error(
-        'Hikibi Push does not support this browser version (Web Push not supported)'
+        'Hibira Push does not support this browser version (Web Push not supported)'
       );
     }
 
@@ -76,7 +76,7 @@ export class Client {
       const scopeMatchesCurrentPage = currentURL.startsWith(serviceWorkerScope);
       if (!scopeMatchesCurrentPage) {
         throw new Error(
-          `Could not initialize Hikibi Push: current page not in serviceWorkerRegistration scope (${serviceWorkerScope})`
+          `Could not initialize Hibira Push: current page not in serviceWorkerRegistration scope (${serviceWorkerScope})`
         );
       }
     }
@@ -162,7 +162,7 @@ export class Client {
   _throwIfNotStarted(message) {
     if (!this._deviceId) {
       throw new Error(
-        `${message}. SDK not registered with Hikibi Push. Did you call .start?`
+        `${message}. SDK not registered with Hibira Push. Did you call .start?`
       );
     }
   }
@@ -521,7 +521,7 @@ function isSupportedBrowser() {
   const isSupported =
     'PushManager' in window && 'serviceWorker' in window.navigator;
   if (!isSupported) {
-    console.warn('Hikibi Push needs a browser with Web Push support.');
+    console.warn('Hibira Push needs a browser with Web Push support.');
   }
   return isSupported;
 }
