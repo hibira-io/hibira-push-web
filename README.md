@@ -80,4 +80,4 @@ registered with Beams register again on the first `start()`.
 ## License
 
 MIT. Based on the Pusher Beams web SDK, Copyright (c) 2019 Pusher; see
-LICENSE. Hibira is not affiliated with Pusher.
+LICENSE.
