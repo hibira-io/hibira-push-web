@@ -1,6 +1,6 @@
 {
   "name": "@hibira-io/push-web",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Web push notifications for Hibira Push: a drop-in client for apps moving from Pusher Beams",
   "keywords": [
     "hibira",

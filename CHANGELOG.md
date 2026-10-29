@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1 - 2026-10-29
+
+- The package homepage on npm now links to https://hibira.io. No code changes.
+
 ## 1.2.0 - 2026-10-24
 
 - The default endpoint is now `https://ws.hibira.io`. `https://ws.hikibi.io` keeps
