@@ -98,14 +98,6 @@ Web Push, or while a "Not now" is cooling down.
 With the CDN script it is `HibiraPush.promptForNotifications({...})`. Either
 way, the `/service-worker.js` above is still needed.
 
-## Moving from @hikibi/push-web
-
-Hikibi is now Hibira, and this package moved from `@hikibi/push-web` to
-`@hibira-io/push-web`. The API is the same: change the import and the
-`importScripts` URL, and use `HibiraPush` where you used `HikibiPush` (the
-old name is gone since 1.2.0). `@hikibi/push-web` 1.0.0 stays on npm
-(deprecated) and gets no new versions.
-
 ## Moving from the Beams web SDK
 
 | Beams web SDK | @hibira-io/push-web |
