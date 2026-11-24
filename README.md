@@ -42,7 +42,7 @@ import { Client, TokenProvider } from '@hibira-io/push-web';
 
 const push = new Client({
   instanceId: 'YOUR_INSTANCE_ID', // portal: app page → Push notifications
-  // endpoint: 'https://ws.hibira.io', // the default
+  // endpoint: 'https://api.hibira.io', // the default
 });
 
 await push.start();

@@ -6,7 +6,7 @@ import DeviceStateStore from './device-state-store';
 // not on Hibira's default cluster (it is only used to report deliveries and
 // opens).
 self.HibiraPush = {
-  endpoint: 'https://ws.hibira.io',
+  endpoint: 'https://api.hibira.io',
   onNotificationReceived: null,
 
   _endpoint: () => self.HibiraPush.endpoint.replace(/\/+$/, ''),
