@@ -7,6 +7,8 @@
   registers the browser and sets interests and the user ID. "Not now"
   cooldown, seven languages, bar or card layout, light and dark themes.
 - `resetNotificationPrompt()`, `PromptOutcome` and `PROMPT_LOCALES`.
+- The default endpoint is now `https://api.hibira.io`, Hibira's API host.
+  `https://ws.hibira.io` keeps working, so existing apps need no change.
 
 ## 1.2.1 - 2026-10-29
 
