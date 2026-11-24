@@ -1,14 +1,17 @@
 # Changelog
 
-## 1.3.0 - unreleased
+## 1.4.0 - 2026-11-24
+
+- The default endpoint is now `https://api.hibira.io`, Hibira's API host.
+  `https://ws.hibira.io` keeps working, so existing apps need no change.
+
+## 1.3.0 - 2026-11-01
 
 - `promptForNotifications()`: an in-page banner that asks visitors to turn on
   desktop notifications before the browser's own permission box, then
   registers the browser and sets interests and the user ID. "Not now"
   cooldown, seven languages, bar or card layout, light and dark themes.
 - `resetNotificationPrompt()`, `PromptOutcome` and `PROMPT_LOCALES`.
-- The default endpoint is now `https://api.hibira.io`, Hibira's API host.
-  `https://ws.hibira.io` keeps working, so existing apps need no change.
 
 ## 1.2.1 - 2026-10-29
 
